@@ -10,8 +10,9 @@ function ProductList() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("https://fakestoreapi.com/products");
-        setProducts(response.data);
+        const response = await axios.get("https://dummyjson.com/products");
+
+        setProducts(response.data.products);
         setLoading(false);
       } catch (err) {
         setError("Failed to fetch products");
