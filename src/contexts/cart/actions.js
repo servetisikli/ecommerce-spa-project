@@ -2,17 +2,17 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const UPDATE_CART_ITEM = "UPDATE_CART_ITEM";
 
-export const addToCart = item => ({
+export const addToCart = (item) => ({
   type: ADD_TO_CART,
-  payload: item
+  payload: item,
 });
 
-export const removeFromCart = id => ({
+export const removeFromCart = (id) => ({
   type: REMOVE_FROM_CART,
-  payload: { id }
+  payload: { id },
 });
 
-export const updateCartItem = item => ({
+export const updateCartItem = (item) => ({
   type: UPDATE_CART_ITEM,
-  payload: item
+  payload: item,
 });
