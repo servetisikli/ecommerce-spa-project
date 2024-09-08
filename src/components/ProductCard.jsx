@@ -25,7 +25,9 @@ function ProductCard({ product }) {
           <Heading size="sm" textAlign="left">
             {product.title}
           </Heading>
-          <Text textAlign="left">{product.description}</Text>
+          <Text textAlign="left" fontSize="sm">
+            {product.description}
+          </Text>
         </Stack>
       </CardBody>
       {/*<Divider />*/}
