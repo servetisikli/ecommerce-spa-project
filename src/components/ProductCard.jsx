@@ -4,8 +4,6 @@ import {
   ButtonGroup,
   Card,
   CardBody,
-  CardFooter,
-  Divider,
   Heading,
   Icon,
   Image,
@@ -30,7 +28,6 @@ function ProductCard({ product }) {
           </Text>
         </Stack>
       </CardBody>
-      {/*<Divider />*/}
       <Stack spacing="3" align="start" px="4" py="2">
         <Text
           color="red.600"
