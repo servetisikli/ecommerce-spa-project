@@ -1,27 +1,14 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import { SimpleGrid } from "@chakra-ui/react";
 import ProductCard from "./ProductCard";
+import useFetch from "../hooks/useFetch";
 
 function ProductList() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get("https://dummyjson.com/products");
-        setProducts(response.data.products);
-        setLoading(false);
-      } catch (err) {
-        setError("Failed to fetch products");
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+  const {
+    data: products,
+    loading,
+    error,
+  } = useFetch("https://dummyjson.com/products");
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;

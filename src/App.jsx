@@ -3,15 +3,20 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
+import { CartProvider } from "./contexts/cart/CartContext";
+import Cart from "./components/Cart";
 
 function App() {
   return (
     <>
-      <ChakraProvider>
-        <Navbar />
-        <Home />
-        <Footer />
-      </ChakraProvider>
+      <CartProvider>
+        <ChakraProvider>
+          <Navbar />
+          <Home />
+          <Footer />
+          <Cart />
+        </ChakraProvider>
+      </CartProvider>
     </>
   );
 }

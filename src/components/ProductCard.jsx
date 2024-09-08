@@ -13,8 +13,11 @@ import {
   chakra,
 } from "@chakra-ui/react";
 import { FiShoppingCart } from "react-icons/fi";
+import useCart from "../hooks/useCart";
 
 function ProductCard({ product }) {
+  const { addToCart } = useCart();
+
   return (
     <Card maxW="sm">
       <CardBody>
@@ -38,7 +41,14 @@ function ProductCard({ product }) {
           ${product.price}
         </Text>
         <ButtonGroup spacing="2" width="full">
-          <Button variant="solid" colorScheme="yellow" width="full">
+          <Button
+            onClick={() => {
+              addToCart(product);
+            }}
+            variant="solid"
+            colorScheme="yellow"
+            width="full"
+          >
             <Tooltip>
               <chakra.a href={"#"} display={"flex"}>
                 <Icon
