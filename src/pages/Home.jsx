@@ -5,7 +5,6 @@ import ProductList from "../components/ProductList";
 const Home = () => {
   return (
     <div>
-      Home Page-Store-
       <Carousel />
       <ProductList />
     </div>

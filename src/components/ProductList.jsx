@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { SimpleGrid } from "@chakra-ui/react";
 import ProductCard from "./ProductCard";
 
 function ProductList() {
@@ -11,7 +12,6 @@ function ProductList() {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("https://dummyjson.com/products");
-
         setProducts(response.data.products);
         setLoading(false);
       } catch (err) {
@@ -27,11 +27,11 @@ function ProductList() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
+    <SimpleGrid columns={{ base: 2, sm: 2, md: 3, lg: 4 }} spacing={5}>
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
-    </div>
+    </SimpleGrid>
   );
 }
 
