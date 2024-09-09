@@ -1,28 +1,74 @@
 import React from "react";
+import {
+  Box,
+  Button,
+  VStack,
+  HStack,
+  Image,
+  Text,
+  Heading,
+  List,
+  ListItem,
+  Divider,
+  IconButton,
+} from "@chakra-ui/react";
+import { DeleteIcon, AddIcon } from "@chakra-ui/icons";
 import useCart from "../hooks/useCart";
 
 const Cart = () => {
   const { cart, removeFromCart, updateCartItem } = useCart();
 
   return (
-    <div className="cart">
-      <h2>Shopping Cart</h2>
+    <Box p={5}>
+      <Heading as="h2" size="lg" mb={5}>
+        Shopping Cart
+      </Heading>
       {cart.length === 0 ? (
-        <p>Your cart is empty</p>
+        <Text>Your cart is empty</Text>
       ) : (
-        <ul>
-          {cart.map(item => (
-            <li key={item.id}>
-              <h3>{item.name}</h3>
-              <p>{item.description}</p>
-              <p>{item.price}</p>
-              <button onClick={() => removeFromCart(item.id)}>Remove</button>
-              <button onClick={() => updateCartItem({ ...item, quantity: item.quantity + 1 })}>Increase Quantity</button>
-            </li>
+        <List spacing={3}>
+          {cart.map((item) => (
+            <ListItem key={item.id}>
+              <HStack spacing={4} alignItems="center">
+                <Image
+                  boxSize="100px"
+                  src={item.thumbnail}
+                  alt={item.name}
+                  borderRadius="md"
+                />
+                <VStack align="start" spacing={1} flex="1">
+                  <Heading as="h3" size="md">
+                    {item.name}
+                  </Heading>
+                  <Text>{item.description}</Text>
+                  <Text fontWeight="bold">${item.price}</Text>
+                </VStack>
+                <HStack>
+                  <IconButton
+                    aria-label="Increase Quantity"
+                    icon={<AddIcon />}
+                    onClick={() =>
+                      updateCartItem({ ...item, quantity: item.quantity + 1 })
+                    }
+                  />
+                  <IconButton
+                    aria-label="Remove from Cart"
+                    icon={<DeleteIcon />}
+                    onClick={() => removeFromCart(item.id)}
+                  />
+                </HStack>
+              </HStack>
+              <Divider my={3} />
+            </ListItem>
           ))}
-        </ul>
+        </List>
       )}
-    </div>
+      {cart.length > 0 && (
+        <Button colorScheme="teal" size="lg" width="full" mt={5}>
+          Proceed to Checkout
+        </Button>
+      )}
+    </Box>
   );
 };
 

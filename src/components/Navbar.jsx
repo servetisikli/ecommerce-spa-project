@@ -22,6 +22,7 @@ const Links = [
   { name: "Categories", url: "/categories" },
   { name: "My Account", url: "/myaccount" },
   { name: "Contact", url: "/contact" },
+  { name: "Cart", url: "/cart" },
 ];
 const NavLink = (props) => {
   const { children, href } = props;
