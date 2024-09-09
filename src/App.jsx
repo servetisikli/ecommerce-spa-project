@@ -2,7 +2,7 @@ import "./App.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import Home from "./pages/Home";
 import { CartProvider } from "./contexts/cart/CartContext";
-import Categories from "./pages/Categories";
+import Categories from "./components/Categories";
 import MyAccount from "./pages/MyAccount";
 import MainLayout from "./layouts/MainLayout";
 import { Route, Routes } from "react-router-dom";
