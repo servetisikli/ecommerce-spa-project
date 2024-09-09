@@ -64,7 +64,7 @@ const Cart = () => {
         </List>
       )}
       {cart.length > 0 && (
-        <Button colorScheme="teal" size="lg" width="full" mt={5}>
+        <Button colorScheme="yellow" size="lg" width="full" mt={5}>
           Proceed to Checkout
         </Button>
       )}
