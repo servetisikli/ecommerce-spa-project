@@ -13,6 +13,7 @@ import MinimalLayout from "./layouts/MinimalLayout";
 import NotFound from "./pages/NotFound";
 import AuthLayout from "./layouts/AuthLayout";
 import Cart from "./pages/Cart";
+import ProductDetail from "./components/ProductDetail";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
               <Route path="myaccount" element={<MyAccount />} />
               <Route path="contact" element={<Contact />} />
               <Route path="cart" element={<Cart />} />
-
+              <Route path="product/:productId" element={<ProductDetail />} />
             </Route>
 
             <Route path="/auth" element={<AuthLayout />}>
