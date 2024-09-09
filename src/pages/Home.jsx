@@ -1,7 +1,7 @@
 import React from "react";
 import Carousel from "../components/Carousel";
 import ProductList from "../components/ProductList";
-import Cart from "../components/Cart";
+import Cart from "./Cart";
 
 const Home = () => {
   return (
