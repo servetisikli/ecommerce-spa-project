@@ -17,10 +17,14 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
-const Links = ["Dashboard", "Projects", "Team"];
-
+const Links = [
+  { name: "Home", url: "/" },
+  { name: "Categories", url: "/categories" },
+  { name: "My Account", url: "/myaccount" },
+  { name: "Contact", url: "/contact" },
+];
 const NavLink = (props) => {
-  const { children } = props;
+  const { children, href } = props;
 
   return (
     <Box
@@ -32,7 +36,7 @@ const NavLink = (props) => {
         textDecoration: "none",
         bg: useColorModeValue("gray.200", "gray.700"),
       }}
-      href={"#"}
+      href={href}
     >
       {children}
     </Box>
@@ -61,7 +65,9 @@ export default function Simple() {
               display={{ base: "none", md: "flex" }}
             >
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <NavLink key={link.name} href={link.url}>
+                  {link.name}
+                </NavLink>
               ))}
             </HStack>
           </HStack>
