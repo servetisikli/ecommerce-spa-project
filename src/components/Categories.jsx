@@ -1,9 +1,14 @@
-import React from 'react'
+import { Heading } from "@chakra-ui/react";
+import React from "react";
 
 const Categories = () => {
   return (
-    <div>Categories</div>
-  )
-}
+    <div>
+      <Heading as="h2" size="lg" mb={5}>
+        Categories
+      </Heading>
+    </div>
+  );
+};
 
-export default Categories
+export default Categories;
