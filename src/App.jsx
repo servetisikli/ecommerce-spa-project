@@ -27,7 +27,7 @@ function App() {
               <Route path="myaccount" element={<MyAccount />} />
               <Route path="contact" element={<Contact />} />
               <Route path="cart" element={<Cart />} />
-              <Route path="product/:productId" element={<ProductDetail />} />
+              <Route path="product/:id" element={<ProductDetail />} />
             </Route>
 
             <Route path="/auth" element={<AuthLayout />}>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function useFetch(url) {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -10,7 +10,12 @@ function useFetch(url) {
     const fetchData = async () => {
       try {
         const response = await axios.get(url);
-        setData(response.data.products);
+        
+        if (response.data.products) {
+          setData(response.data.products);
+        } else {
+          setData(response.data);
+        }
       } catch (err) {
         setError("Failed to fetch data");
       } finally {
