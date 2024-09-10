@@ -1,28 +1,174 @@
+"use client";
+
 import React from "react";
+import {
+  Box,
+  Container,
+  Stack,
+  Text,
+  Image,
+  Flex,
+  VStack,
+  Button,
+  Heading,
+  SimpleGrid,
+  StackDivider,
+  useColorModeValue,
+  List,
+  ListItem,
+} from "@chakra-ui/react";
+import { MdLocalShipping } from "react-icons/md";
 import { useParams } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
+import useFetch from "../hooks/useFetch"; // Eğer useFetch kullanıyorsan
 
-function ProductDetail() {
+export default function ProductDetail() {
   const { id } = useParams();
-  const { data, loading, error } = useFetch(`https://dummyjson.com/products/${id}`);
+  const {
+    data: product,
+    loading,
+    error,
+  } = useFetch(`https://dummyjson.com/products/${id}`);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error: {error}</Text>;
 
   return (
-    <div>
-      <h1>{data.title}</h1>
-      <p>{data.description}</p>
-      <p>Price: ${data.price}</p>
-      <p>Brand: {data.brand}</p>
-      <p>Category: {data.category}</p>
-      <img
-        src={data.thumbnail}
-        alt={data.title}
-        style={{ width: "300px", height: "auto" }}
-      />
-    </div>
+    <Container maxW={"7xl"}>
+      <SimpleGrid
+        columns={{ base: 1, lg: 2 }}
+        spacing={{ base: 8, md: 10 }}
+        py={{ base: 18, md: 24 }}
+      >
+        <Flex>
+          <Image
+            rounded={"md"}
+            alt={product.title}
+            src={product.thumbnail}
+            fit={"cover"}
+            align={"center"}
+            w={"100%"}
+            h={{ base: "100%", sm: "400px", lg: "500px" }}
+          />
+        </Flex>
+        <Stack spacing={{ base: 6, md: 10 }}>
+          <Box as={"header"}>
+            <Heading
+              lineHeight={1.1}
+              fontWeight={600}
+              fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
+            >
+              {product.title}
+            </Heading>
+            <Text
+              color={useColorModeValue("gray.900", "gray.400")}
+              fontWeight={300}
+              fontSize={"2xl"}
+            >
+              ${product.price} USD
+            </Text>
+          </Box>
+
+          <Stack
+            spacing={{ base: 4, sm: 6 }}
+            direction={"column"}
+            divider={
+              <StackDivider
+                borderColor={useColorModeValue("gray.200", "gray.600")}
+              />
+            }
+          >
+            <VStack spacing={{ base: 4, sm: 6 }}>
+              <Text
+                color={useColorModeValue("gray.500", "gray.400")}
+                fontSize={"2xl"}
+                fontWeight={"300"}
+              >
+                {product.description}
+              </Text>
+              <Text fontSize={"lg"}>
+                {product.description}{" "}
+                {/* Eğer daha uzun bir açıklama varsa burada kullanabilirsin */}
+              </Text>
+            </VStack>
+            <Box>
+              <Text
+                fontSize={{ base: "16px", lg: "18px" }}
+                color={useColorModeValue("yellow.500", "yellow.300")}
+                fontWeight={"500"}
+                textTransform={"uppercase"}
+                mb={"4"}
+              >
+                Features
+              </Text>
+
+              <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+                <List spacing={2}>
+                  <ListItem>{product.brand}</ListItem>
+                  <ListItem>{product.category}</ListItem>
+                  <ListItem>{product.rating} stars</ListItem>
+                </List>
+                <List spacing={2}>
+                  <ListItem>Stock: {product.stock}</ListItem>
+                </List>
+              </SimpleGrid>
+            </Box>
+            <Box>
+              <Text
+                fontSize={{ base: "16px", lg: "18px" }}
+                color={useColorModeValue("yellow.500", "yellow.300")}
+                fontWeight={"500"}
+                textTransform={"uppercase"}
+                mb={"4"}
+              >
+                Product Details
+              </Text>
+
+              <List spacing={2}>
+                <ListItem>
+                  <Text as={"span"} fontWeight={"bold"}>
+                    Brand:
+                  </Text>{" "}
+                  {product.brand}
+                </ListItem>
+                <ListItem>
+                  <Text as={"span"} fontWeight={"bold"}>
+                    Category:
+                  </Text>{" "}
+                  {product.category}
+                </ListItem>
+                <ListItem>
+                  <Text as={"span"} fontWeight={"bold"}>
+                    Rating:
+                  </Text>{" "}
+                  {product.rating} stars
+                </ListItem>
+              </List>
+            </Box>
+          </Stack>
+
+          <Button
+            rounded={"none"}
+            w={"full"}
+            mt={8}
+            size={"lg"}
+            py={"7"}
+            bg={useColorModeValue("gray.900", "gray.50")}
+            color={useColorModeValue("white", "gray.900")}
+            textTransform={"uppercase"}
+            _hover={{
+              transform: "translateY(2px)",
+              boxShadow: "lg",
+            }}
+          >
+            Add to cart
+          </Button>
+
+          <Stack direction="row" alignItems="center" justifyContent={"center"}>
+            <MdLocalShipping />
+            <Text>2-3 business days delivery</Text>
+          </Stack>
+        </Stack>
+      </SimpleGrid>
+    </Container>
   );
 }
-
-export default ProductDetail;
