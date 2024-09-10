@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   ButtonGroup,
@@ -11,18 +11,28 @@ import {
   Text,
   Tooltip,
   chakra,
+  Spacer,
 } from "@chakra-ui/react";
 import { FiShoppingCart } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import useCart from "../hooks/useCart";
 
 function ProductCard({ product }) {
+  const [quantity, setQuantity] = useState(0);
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
   const handleCardClick = () => {
     navigate(`/product/${product.id}`);
   };
+
+  const handleAddToCart = () => {
+    setQuantity(quantity + 1);
+    addToCart(product);
+  };
+
+  const incrementQuantity = () => setQuantity(quantity + 1);
+  const decrementQuantity = () => setQuantity(quantity > 0 ? quantity - 1 : 0);
 
   return (
     <Card maxW="sm">
@@ -60,26 +70,37 @@ function ProductCard({ product }) {
           ${product.price}
         </Text>
         <ButtonGroup spacing="2" width="full">
-          <Button
-            onClick={(e) => {
-              e.stopPropagation();
-              addToCart(product);
-            }}
-            variant="solid"
-            colorScheme="yellow"
-            width="full"
-          >
-            <Tooltip>
-              <Icon
-                as={FiShoppingCart}
-                h={5}
-                w={5}
-                alignSelf={"center"}
-                mr={2}
-              />
-            </Tooltip>
-            Add to Cart
-          </Button>
+          {quantity === 0 ? (
+            <Button
+              onClick={handleAddToCart}
+              variant="solid"
+              colorScheme="yellow"
+              width="full"
+            >
+              <Tooltip label="Add to Cart">
+                <Icon
+                  as={FiShoppingCart}
+                  h={5}
+                  w={5}
+                  alignSelf={"center"}
+                  mr={2}
+                />
+              </Tooltip>
+              Add to Cart
+            </Button>
+          ) : (
+            <ButtonGroup spacing="2" width="full">
+              <Button onClick={decrementQuantity} colorScheme="yellow">
+                -
+              </Button>
+              <Spacer />
+              <Text alignSelf="center">{quantity}</Text>
+              <Spacer />
+              <Button onClick={incrementQuantity} colorScheme="yellow">
+                +
+              </Button>
+            </ButtonGroup>
+          )}
         </ButtonGroup>
       </Stack>
     </Card>
