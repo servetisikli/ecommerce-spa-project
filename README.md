@@ -2,6 +2,13 @@
 
 This is a single-page application (SPA) for an e-commerce platform built with React, Vite, Chakra UI, and Tailwind CSS. It allows users to browse products, add them to the cart, and proceed to checkout.
 
+## Web Page
+
+You can access the web page for the chat application at the following URL:
+
+[E-Commerce SPA Project Web Page](https://ecommerce-spa-project.onrender.com/)
+
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -39,7 +46,6 @@ This is a single-page application (SPA) for an e-commerce platform built with Re
 
 1. Start the development server as described in the [Installation](#installation) section.
 2. Open your browser and navigate to `http://localhost:5173`.
-
 
 ## API Endpoints
 
